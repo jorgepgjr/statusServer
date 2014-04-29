@@ -42,6 +42,8 @@ public class StatusServer extends JPanel {
     JLabel status11 = new JLabel(" ");
     JLabel jbdev23 = new JLabel("JBDEV23: ");       
     JLabel status23 = new JLabel(" ");
+    JLabel jbdev05 = new JLabel("JBDEV05: ");       
+    JLabel status05 = new JLabel(" ");
     
     public StatusServer(){
         setLayout(new BorderLayout());
@@ -91,7 +93,7 @@ public class StatusServer extends JPanel {
         String url = eElement.getElementsByTagName("xa-datasource-property").item(0).getTextContent();
         if (url.equals("jdbc:oracle:thin:@172.20.5.140:1521:HOM10G03")){
             status.setText("Homolog");
-        }else if (url.equals("jdbc:oracle:thin:@10.130.8.23:1521:HOM10G04")){
+        }else if (url.equals("jdbc:oracle:thin:@10.130.8.29:1521:HOM10G04")){
             status.setText("Amazon");
         }
     }
@@ -136,6 +138,15 @@ public class StatusServer extends JPanel {
             final String originFile23 = "/app/jboss/jboss-eap-5.2/jboss-as/server/JBDEV23/deploy/datasource/oracle-sac_homolog-amazon-xa-ds.xml";
             sftpChannel.get(originFile23, "jbdev23.xml");
             carregaStatus("jbdev23.xml", status23);
+            
+            final String originFile05 = "/app/jboss/jboss-4.3.0.GA_CP10/jboss-as/server/JBDEV05/deploy/datasource/oracle-assineabril_homolog-xa-ds.xml";
+            sftpChannel.get(originFile05, "jbdev05.xml");
+            //TODO: fazer o status dos serviços
+            carregaStatus("jbdev23.xml", status05);
+            
+            
+            
+            
             sftpChannel.exit();
             session.disconnect();
         } catch (JSchException e) {
