@@ -37,7 +37,7 @@ public class StatusServer extends JPanel {
 
     private static final long serialVersionUID = 8065280897234256299L;
     
-    
+    boolean conectionFail = false;
     JLabel jbdev11 = new JLabel("JBDEV11: ");
     JLabel status11 = new JLabel(" ");
     JLabel jbdev23 = new JLabel("JBDEV23: ");       
@@ -55,7 +55,9 @@ public class StatusServer extends JPanel {
 
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                carregaServerFiles();
+                if (!conectionFail) {
+                    carregaServerFiles();                    
+                }
             };
         });
         
@@ -144,12 +146,11 @@ public class StatusServer extends JPanel {
             //TODO: fazer o status dos serviços
             carregaStatus("jbdev23.xml", status05);
             
-            
-            
-            
             sftpChannel.exit();
             session.disconnect();
         } catch (JSchException e) {
+            // Não conseguiu se conectar por alguma razão, não deixar o presuntinho ficar clicando feito um louco
+            conectionFail = true;
             e.printStackTrace();  
         } catch (SftpException e) {
             e.printStackTrace();
