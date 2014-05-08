@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ===================================================================== -->
+<!--                                                                       -->
+<!--  JBoss Server Configuration                                           -->
+<!--                                                                       -->
+<!-- ===================================================================== -->
+
+<!-- $Id: oracle-ds.xml,v 1.1.2.4 2003/09/17 03:46:01 ejort Exp $ -->
+<!-- ==================================================================== -->
+<!--  Datasource config for Oracle originally from Steven Coy             -->
+<!-- ==================================================================== -->
+<datasources>
+	<xa-datasource>
+		<jndi-name>jdbc/AssineAbril_DB</jndi-name>
+		<track-connection-by-tx></track-connection-by-tx>
+		<isSameRM-override-value>false</isSameRM-override-value>
+		<xa-datasource-class>oracle.jdbc.xa.client.OracleXADataSource</xa-datasource-class>
+		<xa-datasource-property name="URL">jdbc:oracle:thin:@172.20.5.140:1521:HOM10G03</xa-datasource-property>
+		<xa-datasource-property name="User">asi_user</xa-datasource-property>
+		<xa-datasource-property name="Password">aloha987br</xa-datasource-property>
+		<exception-sorter-class-name>org.jboss.resource.adapter.jdbc.vendor.OracleExceptionSorter</exception-sorter-class-name>
+		
+		<!-- Uses the pingDatabase method to check a connection is still valid before handing it out from the pool -->
+		<valid-connection-checker-class-name>org.jboss.resource.adapter.jdbc.vendor.OracleValidConnectionChecker</valid-connection-checker-class-name> -->
+
+		<!-- The minimum connections in a pool/sub-pool. Pools are lazily constructed on first use -->
+		<min-pool-size>1</min-pool-size>
+
+		<!-- The maximum connections in a pool/sub-pool -->
+		<max-pool-size>10</max-pool-size>
+
+		<blocking-timeout-millis>6000</blocking-timeout-millis>
+		
+		<idle-timeout-minutes>10</idle-timeout-minutes> <!-- timeout da conexao fisica -->
+		
+		<prepared-statement-cache-size>100</prepared-statement-cache-size>
+		
+		<no-tx-separate-pools></no-tx-separate-pools>
+		<metadata>
+			<type-mapping>Oracle9i</type-mapping>
+		</metadata>
+	</xa-datasource>
+</datasources>
